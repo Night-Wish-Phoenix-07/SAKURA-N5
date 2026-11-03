@@ -4,3 +4,7 @@
   .hero{padding:60px 16px}
   .hero h1{font-size:1.7rem}
 }
+@media (max-width:640px){
+  .dash-head h1{font-size:1.4rem}
+  .stat span{font-size:1.5rem}
+}
