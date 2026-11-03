@@ -1,0 +1,6 @@
+@media (max-width:640px){
+  .nav{flex-direction:column;gap:10px;padding:12px}
+  .nav nav{flex-wrap:wrap;justify-content:center;gap:10px}
+  .hero{padding:60px 16px}
+  .hero h1{font-size:1.7rem}
+}
