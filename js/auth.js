@@ -34,17 +34,19 @@ $("loginBtn")?.addEventListener("click", async () => {
 $("logoutBtn")?.addEventListener("click", () => signOut(auth));
 
 onAuthStateChanged(auth, async (user) => {
+  if (!$("loginBtn")) return;   // only run on the landing page
+
   const loggedIn = !!user;
-  $("loginBtn") && ($("loginBtn").hidden = loggedIn);
-  $("logoutBtn") && ($("logoutBtn").hidden = !loggedIn);
-  $("dashLink") && ($("dashLink").hidden = !loggedIn);
-  $("welcome") && ($("welcome").hidden = !loggedIn);
+  $("loginBtn").hidden = loggedIn;
+  $("logoutBtn").hidden = !loggedIn;
+  $("dashLink").hidden = !loggedIn;
+  $("welcome").hidden = !loggedIn;
 
   if (user) {
-    if ($("welcome")) $("welcome").textContent = "ようこそ, " + (user.displayName || "student") + "! 🌸";
+    $("welcome").textContent = "ようこそ, " + (user.displayName || "student") + "! 🌸";
     await saveProfile(user);
-    if ($("adminLink")) $("adminLink").hidden = !(await isAdmin(user.uid));
-  } else if ($("adminLink")) {
+    $("adminLink").hidden = !(await isAdmin(user.uid));
+  } else {
     $("adminLink").hidden = true;
   }
 });
