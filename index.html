@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAKURA N5 | Learn Japanese</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="index.html">🌸 SAKURA N5</a>
+    <nav>
+      <a href="#lessons">Lessons</a>
+      <a href="pages/dashboard.html" id="dashLink" hidden>Dashboard</a>
+      <a href="pages/admin.html" id="adminLink" hidden>Admin</a>
+      <button id="loginBtn" class="btn">Sign in with Google</button>
+      <button id="logoutBtn" class="btn btn-outline" hidden>Sign out</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="jp">日本語を学ぼう</p>
+      <h1>Learn Japanese, one step at a time.</h1>
+      <p>A free JLPT N5 learning platform. 25 lessons, open to everyone.</p>
+      <a href="#lessons" class="btn">Start learning</a>
+      <p id="welcome" class="welcome" hidden></p>
+    </section>
+
+    <section id="lessons" class="container">
+      <h2>Elementary 1 <span class="jp">· Lessons 1–12</span></h2>
+      <div id="vol1" class="grid"></div>
+      <h2>Elementary 2 <span class="jp">· Lessons 13–25</span></h2>
+      <div id="vol2" class="grid"></div>
+    </section>
+  </main>
+
+  <footer>SAKURA N5 · Free for everyone 🌸</footer>
+
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/lessons.js"></script>
+</body>
+</html>
