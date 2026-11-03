@@ -1,0 +1,38 @@
+:root{
+  --bg:#F8F3E9; --red:#B83232; --indigo:#243653; --pink:#E9A8B5;
+  --text:#292929; --card:#FFFDF8; --border:#E6DCC8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans JP","Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:inherit;text-decoration:none}
+.jp{color:var(--red);font-weight:500}
+
+.nav{display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;background:var(--indigo);color:#fff;position:sticky;top:0;z-index:10}
+.nav .logo{font-size:1.3rem;font-weight:700;letter-spacing:1px}
+.nav nav{display:flex;gap:18px;align-items:center}
+.nav nav a:hover{color:var(--pink)}
+
+.btn{background:var(--red);color:#fff;border:none;padding:10px 20px;border-radius:8px;
+  cursor:pointer;font-size:1rem;display:inline-block;transition:.2s}
+.btn:hover{background:#9c2828;transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1px solid var(--pink);color:#fff}
+[hidden]{display:none!important}
+
+.hero{text-align:center;padding:90px 20px;
+  background:linear-gradient(180deg,#fbe6ea 0%,var(--bg) 100%)}
+.hero .jp{font-size:1.5rem;margin-bottom:8px}
+.hero h1{color:var(--indigo);font-size:2.4rem;margin-bottom:12px}
+.hero p{margin-bottom:22px}
+.welcome{margin-top:18px;color:var(--indigo);font-weight:600}
+
+.container{max-width:1100px;margin:0 auto;padding:50px 20px}
+.container h2{color:var(--indigo);margin:30px 0 16px;border-bottom:2px solid var(--pink);padding-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;transition:.2s}
+.card:hover{box-shadow:0 6px 18px rgba(36,54,83,.12);transform:translateY(-3px)}
+.card .num{color:var(--red);font-weight:700;font-size:.85rem}
+.card h3{color:var(--indigo);margin:4px 0}
+.card p{font-size:.9rem;color:#555}
+
+footer{text-align:center;padding:30px;color:#777;border-top:1px solid var(--border)}
