@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn() &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Admin list: a user can only check their own entry; no one writes from the app
+    match /admins/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list, write: if false;
+    }
+
+    // Learning content: public read, admin write
+    match /{col}/{id} {
+      allow read: if col in ['lessons','vocabulary','grammar','kanji','hiragana',
+                             'katakana','quizzes','mockExams'];
+      allow write: if isAdmin() && col in ['lessons','vocabulary','grammar','kanji',
+                             'hiragana','katakana','quizzes','mockExams'];
+    }
+
+    // Private student data
+    match /users/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+    match /userProgress/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+    match /bookmarks/{id} {
+      allow read, write: if signedIn() && resource.data.uid == request.auth.uid;
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+    }
+    match /achievements/{id} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow write: if false;
+    }
+  }
+}
