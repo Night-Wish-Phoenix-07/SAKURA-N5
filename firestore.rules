@@ -9,7 +9,7 @@ service cloud.firestore {
     }
     function content(col) {
       return col in ['lessons','vocabulary','grammar','kanji','hiragana',
-                     'katakana','quizzes','mockExams'];
+                     'katakana','quizzes','mockExams','listening'];
     }
 
     // Admin list: a user can only check their own entry; nobody writes from the app
