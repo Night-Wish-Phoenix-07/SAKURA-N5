@@ -43,6 +43,7 @@ function renderStart() {
     p.append(el("p", "note", "No mock exam questions have been added yet." +
       (admin ? " Use the form below to add some." : "")));
     box.append(p);
+    renderAdmin();
     return;
   }
 
