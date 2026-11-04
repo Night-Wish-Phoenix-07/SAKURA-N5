@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flashcards | SAKURA N5</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/lessons.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="../index.html">🌸 SAKURA N5</a>
+    <nav>
+      <a href="../index.html#lessons">Lessons</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <p class="jp">フラッシュカード</p>
+    <h1 class="page-title">Flashcards</h1>
+
+    <label class="pick">Lesson <select id="lessonSel"></select></label>
+
+    <div id="flash" class="flash" tabindex="0">
+      <div id="flashText"></div>
+    </div>
+    <p class="note" id="count"></p>
+    <p class="note">Click the card (or press Space) to flip. Use the arrow keys to move.</p>
+
+    <div class="pager">
+      <button id="prevBtn" class="btn btn-outline-dark">← Previous</button>
+      <button id="nextBtn" class="btn btn-outline-dark">Next →</button>
+      <button id="shuffleBtn" class="btn">Shuffle</button>
+    </div>
+  </main>
+
+  <footer>SAKURA N5 · Free for everyone 🌸</footer>
+  <script type="module" src="../js/flashcards.js"></script>
+</body>
+</html>
