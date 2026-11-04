@@ -1,7 +1,7 @@
 import { db } from "./firebase-config.js";
 import {
   collection, doc, getDoc, getDocs, addDoc, setDoc, deleteDoc,
-  query, where, serverTimestamp
+  query, where, writeBatch, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 export async function getLessonDoc(id) {
@@ -15,6 +15,24 @@ export function saveLessonDoc(id, data) {
     { ...data, id: Number(id), updatedAt: serverTimestamp() },
     { merge: true }
   );
+}
+
+// Creates any missing lesson records. Never overwrites lessons you already edited.
+export async function seedLessons(lessons) {
+  const snap = await getDocs(collection(db, "lessons"));
+  const existing = new Set(snap.docs.map((d) => d.id));
+  const batch = writeBatch(db);
+  let created = 0;
+  lessons.forEach((l) => {
+    if (existing.has(String(l.id))) return;
+    batch.set(doc(db, "lessons", String(l.id)), {
+      id: l.id, title: l.title, topic: l.topic, volume: l.volume,
+      summary: l.summary || "", practice: "", updatedAt: serverTimestamp()
+    });
+    created++;
+  });
+  if (created) await batch.commit();
+  return created;
 }
 
 export async function getItems(col, lessonId) {
