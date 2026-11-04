@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson | SAKURA N5</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/lessons.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="../index.html">🌸 SAKURA N5</a>
+    <nav>
+      <a href="../index.html#lessons">Lessons</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="admin.html" id="adminLink" hidden>Admin</a>
+      <button id="logoutBtn" class="btn btn-outline" hidden>Sign out</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="lesson-head">
+      <p class="num" id="lnum"></p>
+      <h1 id="ltitle"></h1>
+      <p class="jp" id="ltopic"></p>
+      <div class="pager">
+        <a id="prev" class="btn btn-outline-dark" href="#">← Previous</a>
+        <a id="next" class="btn btn-outline-dark" href="#">Next →</a>
+      </div>
+    </section>
+
+    <div class="tabs" id="tabs">
+      <button data-tab="overview" class="active">Overview</button>
+      <button data-tab="vocabulary">Vocabulary</button>
+      <button data-tab="grammar">Grammar</button>
+      <button data-tab="kanji">Kanji</button>
+    </div>
+
+    <section id="content"></section>
+  </main>
+
+  <footer>SAKURA N5 · Free for everyone 🌸</footer>
+  <script type="module" src="../js/lesson-page.js"></script>
+</body>
+</html>
