@@ -56,6 +56,7 @@ export function updateItem(col, itemId, data) {
 export function removeItem(col, itemId) {
   return deleteDoc(doc(db, col, itemId));
 }
+
 export async function getAll(col) {
   const snap = await getDocs(collection(db, col));
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -71,6 +72,7 @@ export async function deleteLessonContent(lessonId) {
   batch.delete(doc(db, "lessons", String(lessonId)));
   await batch.commit();
 }
+
 export function addPlain(col, data) {
   return addDoc(collection(db, col), { ...data, createdAt: serverTimestamp() });
 }
