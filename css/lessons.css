@@ -28,3 +28,29 @@
   border:1px solid var(--border);border-radius:8px;background:#fff}
 .form textarea{min-height:90px}
 .form .row{display:flex;gap:8px;flex-wrap:wrap}
+.page-title{color:var(--indigo);font-size:2rem;margin-bottom:14px}
+.pick{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px;
+  font-weight:600;color:var(--indigo)}
+.pick select{padding:8px;font:inherit;border:1px solid var(--border);
+  border-radius:8px;background:#fff;max-width:100%}
+
+.flash{background:var(--card);border:2px solid var(--pink);border-radius:16px;min-height:240px;
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;
+  cursor:pointer;margin:16px 0 8px;user-select:none;transition:.2s}
+.flash.flipped{background:#fff0f3}
+.flash-big{font-size:3rem;color:var(--red);font-weight:600}
+.flash-reading{font-size:1.5rem;color:var(--indigo)}
+.flash-romaji{color:#666;margin-bottom:6px}
+.flash-meaning{font-size:1.6rem;font-weight:600}
+
+.opts{display:grid;gap:10px;margin:14px 0}
+.opt{text-align:left;padding:12px 14px;border:1px solid var(--border);border-radius:10px;
+  background:#fff;font:inherit;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--indigo)}
+.opt:disabled{cursor:default}
+.opt.correct{background:#e6f4ea;border-color:#2e7d32}
+.opt.wrong{background:#fdeaea;border-color:var(--red)}
+.score{font-size:2.2rem;color:var(--red);font-weight:700;margin-bottom:8px}
+.qrow{border-top:1px solid var(--border);padding:10px 0}
+.qrow .actions{display:flex;gap:8px;margin-top:6px}
+.qrow .actions button{padding:6px 12px;font-size:.85rem}
