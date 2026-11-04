@@ -13,8 +13,11 @@
     .tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
     .item .actions .btn{text-decoration:none}
   </style>
+  <script>try{if(sessionStorage.getItem('skNav')){sessionStorage.removeItem('skNav');document.documentElement.classList.add('sk-arriving')}}catch(e){}</script>
+  <link rel="stylesheet" href="../css/scenes.css">
+  <script defer src="../js/scene.js"></script>
 </head>
-<body>
+<body data-scene="temple">
   <header class="nav">
     <a class="logo" href="../index.html">🌸 SAKURA N5</a>
     <nav>
