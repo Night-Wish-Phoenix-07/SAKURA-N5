@@ -4,6 +4,8 @@ import {
   query, where, writeBatch, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+const ms = (x) => (x.createdAt && x.createdAt.toMillis ? x.createdAt.toMillis() : 0);
+
 export async function getLessonDoc(id) {
   const snap = await getDoc(doc(db, "lessons", String(id)));
   return snap.exists() ? snap.data() : null;
@@ -40,7 +42,7 @@ export async function getItems(col, lessonId) {
   const snap = await getDocs(q);
   return snap.docs
     .map((d) => ({ id: d.id, ...d.data() }))
-    .sort((a, b) => (a.createdAt?.seconds || 0) - (b.createdAt?.seconds || 0));
+    .sort((a, b) => ms(a) - ms(b));
 }
 
 export function addItem(col, lessonId, data) {
@@ -59,7 +61,9 @@ export function removeItem(col, itemId) {
 
 export async function getAll(col) {
   const snap = await getDocs(collection(db, col));
-  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  return snap.docs
+    .map((d) => ({ id: d.id, ...d.data() }))
+    .sort((a, b) => ms(a) - ms(b));
 }
 
 // Deletes a lesson's saved record and all its vocabulary, grammar, kanji and quiz items
