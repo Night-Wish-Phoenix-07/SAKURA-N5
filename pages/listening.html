@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Listening Practice | SAKURA N5</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/lessons.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .listen-big{display:block;margin:10px auto 6px;font-size:1.2rem;padding:16px 30px}
+    .center{text-align:center}
+    .reveal{text-align:center;font-weight:600;min-height:1.6em;color:var(--indigo)}
+    .opts .opt{font-size:1.05rem}
+    .slow{display:flex;gap:8px;align-items:center;justify-content:center;margin:8px 0;cursor:pointer}
+    .slow input{width:18px;height:18px;accent-color:var(--red)}
+    .qrow .jp{font-size:1.2rem}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="../index.html">🌸 SAKURA N5</a>
+    <nav>
+      <a href="../index.html#lessons">Lessons</a>
+      <a href="vocabulary.html">Vocabulary</a>
+      <a href="kana.html">Kana</a>
+      <a href="listening.html">Listening</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="admin.html" id="adminLink" hidden>Admin</a>
+      <button id="logoutBtn" class="btn btn-outline" hidden>Sign out</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <p class="jp">聞き取り</p>
+    <h1 class="page-title">Listening practice</h1>
+
+    <section class="panel">
+      <label class="slow"><input type="checkbox" id="slow"> Play slowly</label>
+      <p class="note center" id="soundNote"></p>
+
+      <!-- START -->
+      <div id="startView" class="center">
+        <p>You will hear Japanese. Choose what it means.</p>
+        <p class="note" id="qCount"></p>
+        <button id="startBtn" class="btn" type="button">Start</button>
+      </div>
+
+      <!-- PLAY -->
+      <div id="playView" hidden>
+        <p class="note center" id="progress"></p>
+        <button id="replayBtn" class="btn listen-big" type="button">🔊 Play again</button>
+        <div class="opts" id="opts"></div>
+        <p class="reveal" id="reveal"></p>
+        <div class="pager" style="justify-content:center">
+          <button id="nextBtn" class="btn" type="button" hidden>Next →</button>
+        </div>
+      </div>
+
+      <!-- END -->
+      <div id="endView" hidden>
+        <div class="score center" id="finalScore"></div>
+        <div id="missed"></div>
+        <div class="pager" style="justify-content:center">
+          <button id="againBtn" class="btn" type="button">Try again</button>
+          <button id="homeBtn" class="btn btn-outline-dark" type="button">Back</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN ONLY -->
+    <section id="adminPanel" hidden>
+      <h2>Admin: manage listening questions</h2>
+      <div class="panel" id="seedBox" hidden>
+        <p>Copy the built-in questions into your own editable list, then edit or delete them as you like.</p>
+        <button id="seedBtn" class="btn" type="button">Copy built-in questions</button>
+      </div>
+      <div class="panel" id="adminList"></div>
+      <div class="panel">
+        <h3 id="formTitle">Add a question</h3>
+        <form class="form" id="qForm">
+          <label>Japanese (what is spoken) <input id="fJapanese" type="text" maxlength="80" autocomplete="off"></label>
+          <label>Correct answer (English) <input id="fAnswer" type="text" maxlength="80" autocomplete="off"></label>
+          <label>Wrong answer 1 <input id="fWrong1" type="text" maxlength="80" autocomplete="off"></label>
+          <label>Wrong answer 2 (optional) <input id="fWrong2" type="text" maxlength="80" autocomplete="off"></label>
+          <label>Wrong answer 3 (optional) <input id="fWrong3" type="text" maxlength="80" autocomplete="off"></label>
+          <div class="row">
+            <button id="saveQ" class="btn" type="submit">Save</button>
+            <button id="cancelEdit" class="btn btn-outline-dark" type="button" hidden>Cancel</button>
+          </div>
+          <p class="note" id="formMsg"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>SAKURA N5 · Free for everyone 🌸</footer>
+  <script type="module" src="../js/listening.js"></script>
+</body>
+</html>
