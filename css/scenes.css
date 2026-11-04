@@ -1,0 +1,161 @@
+/* ============================================================
+   SAKURA N5 – scenes, page transition, and the two themes
+   temple  -> every page except Dashboard and Profile
+   moon    -> Dashboard and Profile
+   ============================================================ */
+
+html{background:#120d1c}
+body{background:transparent}
+
+/* ---------- the living background ---------- */
+.sk-scene{position:fixed;inset:0;z-index:-1;overflow:hidden;opacity:0;transition:opacity 1.2s ease;
+  background:linear-gradient(180deg,#1d1736 0%,#120d1c 100%);
+  background-size:cover;background-position:28% 55%;background-repeat:no-repeat}
+.sk-scene.is-ready{opacity:1}
+.sk-scene canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* keeps text readable over the picture */
+.sk-scene::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,7,22,.30) 0%,rgba(10,7,22,.08) 38%,rgba(10,7,22,.50) 100%)}
+
+body[data-scene="moon"] .sk-scene{
+  background:
+    radial-gradient(60% 55% at 16% 80%,rgba(107,43,74,.55),transparent 70%),
+    radial-gradient(45% 40% at 8% 12%,rgba(201,75,107,.16),transparent 70%),
+    linear-gradient(180deg,#2D2138 0%,#170f22 100%);
+  background-size:auto;background-position:0 0}
+body[data-scene="moon"] .sk-scene.is-static{
+  background-size:auto 130%,auto;background-position:right 40%,0 0;background-repeat:no-repeat}
+body[data-scene="moon"] .sk-scene::after{
+  background:linear-gradient(180deg,rgba(18,10,30,.25) 0%,rgba(18,10,30,.05) 40%,rgba(18,10,30,.45) 100%)}
+
+/* ---------- page transition: a band of dusk sweeping top-right -> bottom-left ---------- */
+.sk-veil,html.sk-arriving::before{
+  content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background:
+    radial-gradient(60% 50% at 80% 20%,rgba(255,177,140,.30),transparent 70%),
+    radial-gradient(50% 60% at 15% 85%,rgba(201,75,107,.32),transparent 70%),
+    linear-gradient(135deg,#150f26,#2d2138 55%,#4a1f3f);
+  -webkit-mask-image:linear-gradient(225deg,transparent 0%,transparent 25%,#000 35%,#000 65%,transparent 75%,transparent 100%);
+          mask-image:linear-gradient(225deg,transparent 0%,transparent 25%,#000 35%,#000 65%,transparent 75%,transparent 100%);
+  -webkit-mask-size:400% 400%;mask-size:400% 400%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:50% 50%;mask-position:50% 50%;
+  transform:rotate(180deg)}   /* flips the sweep so it travels top-right -> bottom-left, with the wind */
+.sk-veil{visibility:hidden;-webkit-mask-position:100% 0%;mask-position:100% 0%}
+.sk-veil.is-covering,.sk-veil.is-covered,.sk-veil.is-uncovering{visibility:visible}
+.sk-veil.is-covering{animation:skCover .56s cubic-bezier(.45,0,.3,1) forwards}
+.sk-veil.is-covered{-webkit-mask-position:50% 50%;mask-position:50% 50%}
+.sk-veil.is-uncovering{animation:skUncover .85s cubic-bezier(.3,0,.45,1) forwards}
+/* if scripts never arrive, the arrival cover still lifts by itself */
+html.sk-arriving::before{animation:skUncover .85s cubic-bezier(.3,0,.45,1) 1.2s forwards}
+
+@keyframes skCover{
+  from{-webkit-mask-position:100% 0%;mask-position:100% 0%}
+  to{-webkit-mask-position:50% 50%;mask-position:50% 50%}}
+@keyframes skUncover{
+  from{-webkit-mask-position:50% 50%;mask-position:50% 50%}
+  to{-webkit-mask-position:0% 100%;mask-position:0% 100%}}
+@keyframes skFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes skFadeOut{from{opacity:1}to{opacity:0}}
+
+/* ---------- shared chrome ---------- */
+.nav{background:rgba(20,15,40,.72);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(233,168,181,.18)}
+footer{color:rgba(255,244,240,.75);border-top-color:rgba(255,255,255,.12)}
+
+/* ============================================================
+   TEMPLE – the picture shows around a sheet of washi paper
+   ============================================================ */
+body[data-scene="temple"] .container{
+  width:min(1100px,calc(100% - 28px));max-width:none;margin:28px auto;padding:40px 28px;
+  background:rgba(255,253,248,.90);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  border-radius:20px;box-shadow:0 24px 70px rgba(8,5,20,.45)}
+
+body[data-scene="temple"] .hero{
+  background:none;min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:70px 20px 60px}
+body[data-scene="temple"] .hero .jp{color:#ffb7c8;font-size:1.5rem;text-shadow:0 2px 14px rgba(10,6,24,.7)}
+body[data-scene="temple"] .hero h1{color:#fff6ef;font-size:2.8rem;text-shadow:0 3px 24px rgba(10,6,24,.75)}
+body[data-scene="temple"] .hero p{color:#f6e8ee;text-shadow:0 2px 14px rgba(10,6,24,.7)}
+body[data-scene="temple"] .hero .welcome{color:#ffd9e3}
+
+/* ============================================================
+   MOON – plum glass, rose and peach (palette from the moon picture)
+   #2D2138 night plum · #6B2B4A wine · #C94B6B rose · #FFB18C peach
+   ============================================================ */
+body[data-scene="moon"]{color:#f6e9e6}
+body[data-scene="moon"] .nav{background:rgba(45,33,56,.70);border-bottom-color:rgba(255,177,140,.22)}
+body[data-scene="moon"] .nav nav a:hover{color:#FFB18C}
+body[data-scene="moon"] footer{color:rgba(255,230,222,.7)}
+
+body[data-scene="moon"] .container{
+  width:min(1100px,calc(100% - 28px));max-width:none;margin:28px auto;padding:40px 28px;
+  background:rgba(34,24,46,.60);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,177,140,.18);border-radius:22px;box-shadow:0 24px 70px rgba(10,5,20,.5)}
+
+body[data-scene="moon"] .jp{color:#FFB18C}
+body[data-scene="moon"] .dash-head h1,
+body[data-scene="moon"] .container h2,
+body[data-scene="moon"] .panel h2,
+body[data-scene="moon"] .panel h3,
+body[data-scene="moon"] .card h3{color:#ffe9dd}
+body[data-scene="moon"] .container h2{border-bottom-color:rgba(201,75,107,.75)}
+body[data-scene="moon"] .panel h2{border:none}
+body[data-scene="moon"] .dash-head img{border-color:#C94B6B}
+body[data-scene="moon"] .sub,
+body[data-scene="moon"] .note,
+body[data-scene="moon"] .card p,
+body[data-scene="moon"] .stat small{color:#dcc6cf}
+
+body[data-scene="moon"] .stat,
+body[data-scene="moon"] .panel,
+body[data-scene="moon"] .card{background:rgba(255,255,255,.06);border-color:rgba(255,177,140,.22);color:#f6e9e6}
+body[data-scene="moon"] .card:hover{box-shadow:0 8px 24px rgba(201,75,107,.25)}
+body[data-scene="moon"] .stat span,
+body[data-scene="moon"] .card .num{color:#FFB18C}
+
+body[data-scene="moon"] .bar{background:rgba(255,255,255,.12)}
+body[data-scene="moon"] #barFill{background:linear-gradient(90deg,#C94B6B,#FFB18C)}
+
+body[data-scene="moon"] .badge{background:rgba(255,255,255,.05);border-color:rgba(255,177,140,.32);color:#bfa8b4}
+body[data-scene="moon"] .badge.earned,
+body[data-scene="moon"] a.badge{background:rgba(201,75,107,.24);border:1px solid #C94B6B;color:#ffe9dd}
+body[data-scene="moon"] .lesson-card.done{background:rgba(201,75,107,.18);border-color:#C94B6B}
+
+body[data-scene="moon"] .btn{background:#B93A5C;color:#fff}
+body[data-scene="moon"] .btn:hover{background:#9c2e4c}
+body[data-scene="moon"] .btn-outline{background:transparent;border:1px solid #FFB18C;color:#fff}
+body[data-scene="moon"] .btn-outline:hover{background:rgba(255,177,140,.16)}
+body[data-scene="moon"] .btn-danger{background:#7a1f3a}
+body[data-scene="moon"] .panel.danger{border-color:rgba(201,75,107,.65)}
+
+/* keyboard focus */
+a:focus-visible,.btn:focus-visible{outline:2px solid #FFB18C;outline-offset:2px}
+
+
+/* ---------- wide screens: the page sheet steps aside so the scene's hero shows ---------- */
+@media (min-width:1000px) and (min-aspect-ratio:5/4){
+  /* temple: samurai stands in the left gutter */
+  body[data-scene="temple"] .container{
+    width:min(1100px,calc(100vw - 45vh - 54px));margin:28px 30px 28px auto}
+  /* moon: the moon and branches stay clear on the right */
+  body[data-scene="moon"] .container{
+    width:min(1100px,calc(100vw - 62vh - 60px));margin:28px auto 28px 30px}
+}
+
+/* ---------- small screens ---------- */
+@media (max-width:640px){
+  body[data-scene] .container{width:calc(100% - 16px);margin:12px auto;padding:26px 14px;border-radius:16px}
+  body[data-scene="temple"] .hero{min-height:calc(100vh - 110px);padding:50px 16px}
+  body[data-scene="temple"] .hero h1{font-size:1.9rem}
+  body[data-scene="moon"] .container{background:rgba(34,24,46,.55);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+}
+
+/* ---------- reduced motion: still picture, simple fade between pages ---------- */
+@media (prefers-reduced-motion: reduce){
+  .sk-scene{transition:none}
+  .sk-veil,html.sk-arriving::before{-webkit-mask-image:none;mask-image:none}
+  .sk-veil.is-covering{animation:skFadeIn .2s forwards}
+  .sk-veil.is-uncovering{animation:skFadeOut .25s forwards}
+  html.sk-arriving::before{animation:skFadeOut .25s 1.2s forwards}
+}
