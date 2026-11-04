@@ -56,3 +56,18 @@ export function updateItem(col, itemId, data) {
 export function removeItem(col, itemId) {
   return deleteDoc(doc(db, col, itemId));
 }
+export async function getAll(col) {
+  const snap = await getDocs(collection(db, col));
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+// Deletes a lesson's saved record and all its vocabulary, grammar, kanji and quiz items
+export async function deleteLessonContent(lessonId) {
+  const batch = writeBatch(db);
+  for (const col of ["vocabulary", "grammar", "kanji", "quizzes"]) {
+    const items = await getItems(col, lessonId);
+    items.forEach((it) => batch.delete(doc(db, col, it.id)));
+  }
+  batch.delete(doc(db, "lessons", String(lessonId)));
+  await batch.commit();
+}
