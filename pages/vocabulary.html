@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vocabulary List | SAKURA N5</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/lessons.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .search{flex:1;min-width:200px;padding:10px;font:inherit;border:1px solid var(--border);
+      border-radius:8px;background:#fff}
+    .tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+    .item .actions .btn{text-decoration:none}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="../index.html">🌸 SAKURA N5</a>
+    <nav>
+      <a href="../index.html#lessons">Lessons</a>
+      <a href="vocabulary.html">Vocabulary</a>
+      <a href="kana.html">Kana</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="admin.html" id="adminLink" hidden>Admin</a>
+      <button id="logoutBtn" class="btn btn-outline" hidden>Sign out</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <p class="jp">単語リスト</p>
+    <h1 class="page-title">Vocabulary list</h1>
+
+    <div class="tools">
+      <input id="search" class="search" type="search" placeholder="Search any word or meaning" autocomplete="off">
+      <label class="pick" style="margin:0">Lesson <select id="lessonSel"></select></label>
+    </div>
+    <p class="note" id="count"></p>
+    <p class="note" id="soundNote"></p>
+    <p class="note" id="empty"></p>
+    <div class="items" id="list"></div>
+  </main>
+
+  <footer>SAKURA N5 · Free for everyone 🌸</footer>
+  <script type="module" src="../js/vocabulary.js"></script>
+</body>
+</html>
