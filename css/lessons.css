@@ -60,3 +60,9 @@
 .table-wrap th{color:var(--indigo);white-space:nowrap}
 .table-wrap td.actions{display:flex;gap:6px;flex-wrap:wrap}
 .table-wrap td.actions .btn{padding:6px 10px;font-size:.8rem}
+.timer{font-size:1.3rem;font-weight:700;color:var(--red);margin-bottom:6px}
+.opt.selected{background:#eef2fa;border-color:var(--indigo);font-weight:600}
+.passage{background:#faf6ee;border-left:4px solid var(--pink);padding:12px 14px;
+  border-radius:8px;margin-bottom:14px}
+.review{border-top:1px solid var(--border);padding:12px 0}
+.review p{margin-bottom:4px}
