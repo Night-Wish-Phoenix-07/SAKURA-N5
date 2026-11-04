@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin | SAKURA N5</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/lessons.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="../index.html">🌸 SAKURA N5</a>
+    <nav>
+      <a href="../index.html#lessons">Lessons</a>
+      <a href="dashboard.html">Dashboard</a>
+      <button id="logoutBtn" class="btn btn-outline" hidden>Sign out</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="denied" hidden>
+      <div class="panel">
+        <h2>Administrators only</h2>
+        <p>You need to be signed in with an administrator account to see this page.</p>
+        <p><a class="btn" href="../index.html">Back to home</a></p>
+      </div>
+    </section>
+
+    <section id="panel" hidden>
+      <p class="jp">管理者ダッシュボード</p>
+      <h1 class="page-title">Admin dashboard</h1>
+      <p class="note" id="status"></p>
+
+      <h2>Platform statistics</h2>
+      <div class="stats" id="stats"></div>
+
+      <h2>Lesson content</h2>
+      <div class="panel table-wrap">
+        <table id="lessonTable">
+          <thead>
+            <tr>
+              <th>#</th><th>Lesson</th><th>Vocab</th><th>Grammar</th>
+              <th>Kanji</th><th>Quiz</th><th>Completed by</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <h2>Tools</h2>
+      <div class="panel">
+        <p class="note">Creates a saved record for each of the 25 lessons. Lessons you already edited are not changed.</p>
+        <button id="seedBtn" class="btn">Create all 25 lesson records</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>SAKURA N5 · Free for everyone 🌸</footer>
+  <script type="module" src="../js/admin.js"></script>
+</body>
+</html>
