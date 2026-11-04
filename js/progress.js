@@ -8,10 +8,14 @@ import { isAdmin } from "./auth.js";
 
 const $ = (id) => document.getElementById(id);
 
-/* ---------- Firestore helpers (reused by lesson pages later) ---------- */
-export async function getProgress(uid) {
+/* ---------- Firestore helpers (reused by lesson pages) ---------- */
+export async function getFullProgress(uid) {
   const snap = await getDoc(doc(db, "userProgress", uid));
-  return snap.exists() ? (snap.data().completed || {}) : {};
+  return snap.exists() ? snap.data() : {};
+}
+
+export async function getProgress(uid) {
+  return (await getFullProgress(uid)).completed || {};
 }
 
 export async function setLessonDone(uid, lessonId, done) {
@@ -24,10 +28,15 @@ export async function setLessonDone(uid, lessonId, done) {
 
 /* ---------- Dashboard rendering ---------- */
 let completed = {};
+let extra = {};
 let currentUser = null;
 
 function countDone(volume) {
   return LESSONS.filter((l) => (!volume || l.volume === volume) && completed[l.id]).length;
+}
+
+function mockList() {
+  return (extra.mockResults || []).slice().sort((a, b) => b.date - a.date);
 }
 
 function renderStats() {
@@ -52,12 +61,15 @@ function renderStats() {
 }
 
 function renderAchievements() {
+  const mocks = mockList();
   const list = [
     ["🌱 First lesson", countDone() >= 1],
     ["📘 Five lessons", countDone() >= 5],
     ["🏯 Elementary 1 complete", countDone(1) === 12],
     ["🌸 Elementary 2 complete", countDone(2) === 13],
-    ["🎌 All 25 lessons", countDone() === LESSONS.length]
+    ["🎌 All 25 lessons", countDone() === LESSONS.length],
+    ["📝 First mock exam", mocks.length >= 1],
+    ["🎯 80% or more on a mock exam", mocks.some((m) => m.pct >= 80)]
   ];
   $("achievements").innerHTML = "";
   list.forEach(([label, earned]) => {
@@ -65,6 +77,45 @@ function renderAchievements() {
     d.className = "badge" + (earned ? " earned" : "");
     d.textContent = label;
     $("achievements").appendChild(d);
+  });
+}
+
+function renderScores() {
+  const qs = extra.quizScores || {};
+  const box = $("quizScores");
+  box.innerHTML = "";
+  const rows = LESSONS.filter((l) => qs[l.id]);
+  if (!rows.length) {
+    const p = document.createElement("p");
+    p.textContent = "No quizzes taken yet.";
+    box.appendChild(p);
+  }
+  rows.forEach((l) => {
+    const a = document.createElement("a");
+    a.className = "badge earned";
+    a.href = "quizzes.html?id=" + l.id;
+    a.textContent = "Lesson " + l.id + " · " + qs[l.id].best + "%";
+    box.appendChild(a);
+  });
+
+  const m = mockList();
+  const mbox = $("mockResults");
+  mbox.innerHTML = "";
+  if (!m.length) {
+    const p = document.createElement("p");
+    p.textContent = "No mock exams taken yet.";
+    mbox.appendChild(p);
+    return;
+  }
+  const best = Math.max(...m.map((x) => x.pct));
+  const summary = document.createElement("p");
+  summary.textContent = "Attempts: " + m.length + " · Best score: " + best + "%";
+  mbox.appendChild(summary);
+  m.slice(0, 5).forEach((r) => {
+    const p = document.createElement("p");
+    p.textContent = new Date(r.date).toLocaleDateString() + " — " +
+      r.score + "/" + r.total + " (" + r.pct + "%)";
+    mbox.appendChild(p);
   });
 }
 
@@ -108,6 +159,7 @@ function renderLessons() {
 function refresh() {
   renderStats();
   renderAchievements();
+  renderScores();
   renderLessons();
 }
 
@@ -125,7 +177,9 @@ onAuthStateChanged(auth, async (user) => {
   if (user.photoURL) { $("avatar").src = user.photoURL; $("avatar").hidden = false; }
   $("adminLink").hidden = !(await isAdmin(user.uid));
 
-  try { completed = await getProgress(user.uid); }
-  catch (e) { alert("Could not load progress: " + e.message); }
+  try {
+    extra = await getFullProgress(user.uid);
+    completed = extra.completed || {};
+  } catch (e) { alert("Could not load progress: " + e.message); }
   refresh();
 });
