@@ -36,6 +36,22 @@
       <h2>Platform statistics</h2>
       <div class="stats" id="stats"></div>
 
+      <h2>Excel import and export</h2>
+      <div class="panel">
+        <p>Add or edit all your lessons' content in Excel, then import it here.</p>
+        <div class="row">
+          <button id="tplBtn" class="btn btn-outline-dark">1. Download empty template</button>
+          <button id="expBtn" class="btn btn-outline-dark">Export current content</button>
+        </div>
+        <p class="note">Use the template to start. Use "Export current content" to edit what is already on the site.</p>
+        <label class="pick">2. Choose your Excel file (.xlsx)
+          <input type="file" id="xlFile" accept=".xlsx">
+        </label>
+        <p class="note" id="xlStatus"></p>
+        <div id="xlPreview"></div>
+        <button id="applyBtn" class="btn" hidden>3. Import now</button>
+      </div>
+
       <h2>Lesson content</h2>
       <div class="panel table-wrap">
         <table id="lessonTable">
@@ -58,6 +74,8 @@
   </main>
 
   <footer>SAKURA N5 · Free for everyone 🌸</footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script type="module" src="../js/admin.js"></script>
+  <script type="module" src="../js/excel.js"></script>
 </body>
 </html>
