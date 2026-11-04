@@ -4,7 +4,7 @@ import { onAuthStateChanged }
 import { LESSONS } from "./lessons.js";
 import { isAdmin } from "./auth.js";
 import { getProgress, setLessonDone } from "./progress.js";
-import { getLessonDoc, saveLessonDoc, getItems, addItem, updateItem, removeItem }
+import { getLessonDoc, saveLessonDoc, seedLessons, getItems, addItem, updateItem, removeItem }
   from "./database.js";
 
 const $ = (id) => document.getElementById(id);
@@ -50,7 +50,7 @@ function renderHeader() {
 function renderOverview(box) {
   const s = el("div", "panel");
   s.append(el("h2", "", "Summary"));
-  s.append(el("p", "pre", lessonData.summary || "No summary has been added yet."));
+  s.append(el("p", "pre", lessonData.summary || base.summary || "No summary has been added yet."));
   box.append(s);
 
   const p = el("div", "panel");
@@ -91,7 +91,7 @@ function buildLessonForm() {
   fields.forEach(([k, label, kind]) => {
     const l = el("label", "", label);
     const i = el(kind);
-    i.value = lessonData[k] || (k === "title" ? base.title : k === "topic" ? base.topic : "");
+    i.value = lessonData[k] || (k === "title" ? base.title : k === "topic" ? base.topic : k === "summary" ? (base.summary || "") : "");
     inputs[k] = i;
     l.append(i);
     f.append(l);
@@ -112,6 +112,21 @@ function buildLessonForm() {
     }
   };
   f.append(save);
+
+  const seed = el("button", "btn btn-outline-dark", "Create all 25 lesson records");
+  seed.style.marginLeft = "8px";
+  seed.onclick = async () => {
+    if (!confirm("Create records for all 25 lessons? Lessons you already edited are not changed.")) return;
+    seed.disabled = true;
+    try {
+      const n = await seedLessons(LESSONS);
+      alert(n ? n + " lesson records created." : "All 25 lesson records already exist.");
+    } catch (e) {
+      alert("Could not create lessons: " + e.message);
+    }
+    seed.disabled = false;
+  };
+  f.append(seed);
   return f;
 }
 
