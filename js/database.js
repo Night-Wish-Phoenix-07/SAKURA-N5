@@ -71,3 +71,6 @@ export async function deleteLessonContent(lessonId) {
   batch.delete(doc(db, "lessons", String(lessonId)));
   await batch.commit();
 }
+export function addPlain(col, data) {
+  return addDoc(collection(db, col), { ...data, createdAt: serverTimestamp() });
+}
