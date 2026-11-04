@@ -7,31 +7,44 @@ service cloud.firestore {
       return signedIn() &&
         exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
+    function content(col) {
+      return col in ['lessons','vocabulary','grammar','kanji','hiragana',
+                     'katakana','quizzes','mockExams'];
+    }
 
+    // Admin list: a user can only check their own entry; nobody writes from the app
     match /admins/{uid} {
       allow get: if signedIn() && request.auth.uid == uid;
       allow list, write: if false;
     }
 
+    // Learning content: public read, admin-only write
     match /{col}/{id} {
-      allow read: if col in ['lessons','vocabulary','grammar','kanji','hiragana',
-                             'katakana','quizzes','mockExams'];
-      allow write: if isAdmin() && col in ['lessons','vocabulary','grammar','kanji',
-                             'hiragana','katakana','quizzes','mockExams'];
+      allow read: if content(col);
+      allow write: if isAdmin() && content(col);
     }
 
+    // Student profile: own record only (admins may read, to count students)
     match /users/{uid} {
       allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
-      allow write: if signedIn() && request.auth.uid == uid;
+      allow create, update: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['name','email','photo','createdAt']);
+      allow delete: if false;
     }
+
+    // Student progress: own record only (admins may read, for statistics)
     match /userProgress/{uid} {
       allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
-      allow write: if signedIn() && request.auth.uid == uid;
+      allow create, update: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['completed','quizScores','mockResults','updatedAt']);
+      allow delete: if false;
     }
+
     match /bookmarks/{id} {
-      allow read, write: if signedIn() && resource.data.uid == request.auth.uid;
+      allow read, update, delete: if signedIn() && resource.data.uid == request.auth.uid;
       allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
     }
+
     match /achievements/{id} {
       allow read: if signedIn() && resource.data.uid == request.auth.uid;
       allow write: if false;
