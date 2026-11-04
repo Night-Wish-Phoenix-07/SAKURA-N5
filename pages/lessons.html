@@ -28,6 +28,10 @@
         <a id="prev" class="btn btn-outline-dark" href="#">← Previous</a>
         <a id="next" class="btn btn-outline-dark" href="#">Next →</a>
       </div>
+      <div class="pager">
+        <a id="flashLink" class="btn" href="flashcards.html">Flashcards</a>
+        <a id="quizLink" class="btn" href="quizzes.html">Take quiz</a>
+      </div>
     </section>
 
     <div class="tabs" id="tabs">
@@ -41,6 +45,12 @@
   </main>
 
   <footer>SAKURA N5 · Free for everyone 🌸</footer>
+
+  <script>
+    var lid = parseInt(new URLSearchParams(location.search).get("id"), 10) || 1;
+    document.getElementById("flashLink").href = "flashcards.html?id=" + lid;
+    document.getElementById("quizLink").href = "quizzes.html?id=" + lid;
+  </script>
   <script type="module" src="../js/lesson-page.js"></script>
 </body>
 </html>
