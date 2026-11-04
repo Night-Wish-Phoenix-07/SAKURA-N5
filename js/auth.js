@@ -26,9 +26,22 @@ async function saveProfile(user) {
   }
 }
 
+let signingIn = false;
 $("loginBtn")?.addEventListener("click", async () => {
-  try { await signInWithPopup(auth, provider); }
-  catch (e) { alert("Sign-in failed: " + e.message); }
+  if (signingIn) return;
+  signingIn = true;
+  $("loginBtn").disabled = true;
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (e) {
+    if (e.code === "auth/popup-blocked") {
+      alert("Your browser blocked the sign-in popup. Allow popups for this site (icon at the right end of the address bar), then click again.");
+    } else if (e.code !== "auth/cancelled-popup-request" && e.code !== "auth/popup-closed-by-user") {
+      alert("Sign-in failed: " + e.message);
+    }
+  }
+  signingIn = false;
+  $("loginBtn").disabled = false;
 });
 
 $("logoutBtn")?.addEventListener("click", () => signOut(auth));
