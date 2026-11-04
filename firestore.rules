@@ -8,13 +8,11 @@ service cloud.firestore {
         exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 
-    // Admin list: a user can only check their own entry; no one writes from the app
     match /admins/{uid} {
       allow get: if signedIn() && request.auth.uid == uid;
       allow list, write: if false;
     }
 
-    // Learning content: public read, admin write
     match /{col}/{id} {
       allow read: if col in ['lessons','vocabulary','grammar','kanji','hiragana',
                              'katakana','quizzes','mockExams'];
@@ -22,12 +20,13 @@ service cloud.firestore {
                              'hiragana','katakana','quizzes','mockExams'];
     }
 
-    // Private student data
     match /users/{uid} {
-      allow read, write: if signedIn() && request.auth.uid == uid;
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow write: if signedIn() && request.auth.uid == uid;
     }
     match /userProgress/{uid} {
-      allow read, write: if signedIn() && request.auth.uid == uid;
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow write: if signedIn() && request.auth.uid == uid;
     }
     match /bookmarks/{id} {
       allow read, write: if signedIn() && resource.data.uid == request.auth.uid;
