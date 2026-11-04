@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Profile | SAKURA N5</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .sub{color:#666;font-size:.95rem}
+    .panel h3{color:var(--indigo);margin-bottom:6px}
+    .danger{border-color:#e3b4b4}
+    .btn-danger{background:#7a1f1f}
+    a.badge{text-decoration:none;color:var(--indigo);border:1px solid var(--pink);background:#fff0f3}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="../index.html">🌸 SAKURA N5</a>
+    <nav>
+      <a href="../index.html#lessons">Lessons</a>
+      <a href="vocabulary.html">Vocabulary</a>
+      <a href="kana.html">Kana</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="admin.html" id="adminLink" hidden>Admin</a>
+      <button id="logoutBtn" class="btn btn-outline">Sign out</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="dash-head">
+      <img id="avatar" alt="Your profile photo" hidden>
+      <div>
+        <p class="jp">プロフィール</p>
+        <h1 id="pName">Loading...</h1>
+        <p class="sub" id="pEmail"></p>
+        <p class="sub" id="pSince"></p>
+      </div>
+    </section>
+    <p class="note" id="loadMsg"></p>
+
+    <section class="stats">
+      <div class="stat"><span id="sDone">0/25</span><small>Lessons completed</small></div>
+      <div class="stat"><span id="sPct">0%</span><small>Overall progress</small></div>
+      <div class="stat"><span id="sQuiz">0</span><small>Quizzes taken</small></div>
+      <div class="stat"><span id="sAvg">–</span><small>Average best quiz score</small></div>
+      <div class="stat"><span id="sMock">0</span><small>Mock exams taken</small></div>
+      <div class="stat"><span id="sBest">–</span><small>Best mock exam</small></div>
+    </section>
+
+    <section class="panel">
+      <div class="bar"><div id="barFill"></div></div>
+      <a id="continueBtn" class="btn" href="#">Continue learning</a>
+    </section>
+
+    <section class="panel">
+      <h2>Lessons to review</h2>
+      <p class="sub">Quizzes where your best score is under 60%.</p>
+      <div id="review"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Recent mock exams</h2>
+      <div id="mockList"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Achievements</h2>
+      <p class="sub" id="badgeCount"></p>
+      <div id="badges" class="badges"></div>
+    </section>
+
+    <section class="panel danger">
+      <h2>Your data</h2>
+      <p>Only you can see your progress. Resetting clears your completed lessons, quiz scores and mock exam results.</p>
+      <p style="margin-top:10px"><button id="resetBtn" class="btn btn-danger" type="button">Reset my progress</button></p>
+      <p class="note" id="resetMsg"></p>
+    </section>
+  </main>
+
+  <footer>SAKURA N5 · Free for everyone 🌸</footer>
+  <script type="module" src="../js/profile.js"></script>
+</body>
+</html>
