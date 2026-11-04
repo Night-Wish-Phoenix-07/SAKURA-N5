@@ -54,3 +54,9 @@
 .qrow{border-top:1px solid var(--border);padding:10px 0}
 .qrow .actions{display:flex;gap:8px;margin-top:6px}
 .qrow .actions button{padding:6px 12px;font-size:.85rem}
+.table-wrap{overflow-x:auto}
+.table-wrap table{width:100%;border-collapse:collapse;min-width:640px}
+.table-wrap th,.table-wrap td{padding:10px 8px;border-bottom:1px solid var(--border);text-align:left;font-size:.92rem}
+.table-wrap th{color:var(--indigo);white-space:nowrap}
+.table-wrap td.actions{display:flex;gap:6px;flex-wrap:wrap}
+.table-wrap td.actions .btn{padding:6px 10px;font-size:.8rem}
