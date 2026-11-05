@@ -66,68 +66,68 @@ footer{color:rgba(255,244,240,.75);border-top-color:rgba(255,255,255,.12)}
 /* ============================================================
    TEMPLE – the picture shows around a sheet of washi paper
    ============================================================ */
-body[data-theme="paper"] .container{
+body[data-theme="paper"] .container,body[data-scene="temple"] .container{
   width:min(1100px,calc(100% - 28px));max-width:none;margin:28px auto;padding:40px 28px;
   background:rgba(255,253,248,.90);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   border-radius:20px;box-shadow:0 24px 70px rgba(8,5,20,.45)}
 
-body[data-theme="paper"] .hero{
+body[data-theme="paper"] .hero,body[data-scene="temple"] .hero{
   background:none;min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:70px 20px 60px}
-body[data-theme="paper"] .hero .jp{color:#ffb7c8;font-size:1.5rem;text-shadow:0 2px 14px rgba(10,6,24,.7)}
-body[data-theme="paper"] .hero h1{color:#fff6ef;font-size:2.8rem;text-shadow:0 3px 24px rgba(10,6,24,.75)}
-body[data-theme="paper"] .hero p{color:#f6e8ee;text-shadow:0 2px 14px rgba(10,6,24,.7)}
-body[data-theme="paper"] .hero .welcome{color:#ffd9e3}
+body[data-theme="paper"] .hero .jp,body[data-scene="temple"] .hero .jp{color:#ffb7c8;font-size:1.5rem;text-shadow:0 2px 14px rgba(10,6,24,.7)}
+body[data-theme="paper"] .hero h1,body[data-scene="temple"] .hero h1{color:#fff6ef;font-size:2.8rem;text-shadow:0 3px 24px rgba(10,6,24,.75)}
+body[data-theme="paper"] .hero p,body[data-scene="temple"] .hero p{color:#f6e8ee;text-shadow:0 2px 14px rgba(10,6,24,.7)}
+body[data-theme="paper"] .hero .welcome,body[data-scene="temple"] .hero .welcome{color:#ffd9e3}
 
 /* ============================================================
    MOON – plum glass, rose and peach (palette from the moon picture)
    #2D2138 night plum · #6B2B4A wine · #C94B6B rose · #FFB18C peach
    ============================================================ */
-body[data-theme="glass"]{color:#f6e9e6}
+body[data-scene="moon"]:not([data-theme="paper"]){color:#f6e9e6}
 body[data-scene="moon"] .nav{background:rgba(45,33,56,.70);border-bottom-color:rgba(255,177,140,.22)}
 body[data-scene="moon"] .nav nav a:hover{color:#FFB18C}
 body[data-scene="moon"] footer{color:rgba(255,230,222,.7)}
 
-body[data-theme="glass"] .container{
+body[data-scene="moon"]:not([data-theme="paper"]) .container{
   width:min(1100px,calc(100% - 28px));max-width:none;margin:28px auto;padding:40px 28px;
   background:rgba(34,24,46,.60);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
   border:1px solid rgba(255,177,140,.18);border-radius:22px;box-shadow:0 24px 70px rgba(10,5,20,.5)}
 
-body[data-theme="glass"] .jp{color:#FFB18C}
-body[data-theme="glass"] .dash-head h1,
-body[data-theme="glass"] .container h2,
-body[data-theme="glass"] .panel h2,
-body[data-theme="glass"] .panel h3,
-body[data-theme="glass"] .card h3{color:#ffe9dd}
-body[data-theme="glass"] .container h2{border-bottom-color:rgba(201,75,107,.75)}
-body[data-theme="glass"] .panel h2{border:none}
-body[data-theme="glass"] .dash-head img{border-color:#C94B6B}
-body[data-theme="glass"] .sub,
-body[data-theme="glass"] .note,
-body[data-theme="glass"] .card p,
-body[data-theme="glass"] .stat small{color:#dcc6cf}
+body[data-scene="moon"]:not([data-theme="paper"]) .jp{color:#FFB18C}
+body[data-scene="moon"]:not([data-theme="paper"]) .dash-head h1,
+body[data-scene="moon"]:not([data-theme="paper"]) .container h2,
+body[data-scene="moon"]:not([data-theme="paper"]) .panel h2,
+body[data-scene="moon"]:not([data-theme="paper"]) .panel h3,
+body[data-scene="moon"]:not([data-theme="paper"]) .card h3{color:#ffe9dd}
+body[data-scene="moon"]:not([data-theme="paper"]) .container h2{border-bottom-color:rgba(201,75,107,.75)}
+body[data-scene="moon"]:not([data-theme="paper"]) .panel h2{border:none}
+body[data-scene="moon"]:not([data-theme="paper"]) .dash-head img{border-color:#C94B6B}
+body[data-scene="moon"]:not([data-theme="paper"]) .sub,
+body[data-scene="moon"]:not([data-theme="paper"]) .note,
+body[data-scene="moon"]:not([data-theme="paper"]) .card p,
+body[data-scene="moon"]:not([data-theme="paper"]) .stat small{color:#dcc6cf}
 
-body[data-theme="glass"] .stat,
-body[data-theme="glass"] .panel,
-body[data-theme="glass"] .card{background:rgba(255,255,255,.06);border-color:rgba(255,177,140,.22);color:#f6e9e6}
-body[data-theme="glass"] .card:hover{box-shadow:0 8px 24px rgba(201,75,107,.25)}
-body[data-theme="glass"] .stat span,
-body[data-theme="glass"] .card .num{color:#FFB18C}
+body[data-scene="moon"]:not([data-theme="paper"]) .stat,
+body[data-scene="moon"]:not([data-theme="paper"]) .panel,
+body[data-scene="moon"]:not([data-theme="paper"]) .card{background:rgba(255,255,255,.06);border-color:rgba(255,177,140,.22);color:#f6e9e6}
+body[data-scene="moon"]:not([data-theme="paper"]) .card:hover{box-shadow:0 8px 24px rgba(201,75,107,.25)}
+body[data-scene="moon"]:not([data-theme="paper"]) .stat span,
+body[data-scene="moon"]:not([data-theme="paper"]) .card .num{color:#FFB18C}
 
-body[data-theme="glass"] .bar{background:rgba(255,255,255,.12)}
-body[data-theme="glass"] #barFill{background:linear-gradient(90deg,#C94B6B,#FFB18C)}
+body[data-scene="moon"]:not([data-theme="paper"]) .bar{background:rgba(255,255,255,.12)}
+body[data-scene="moon"]:not([data-theme="paper"]) #barFill{background:linear-gradient(90deg,#C94B6B,#FFB18C)}
 
-body[data-theme="glass"] .badge{background:rgba(255,255,255,.05);border-color:rgba(255,177,140,.32);color:#bfa8b4}
-body[data-theme="glass"] .badge.earned,
-body[data-theme="glass"] a.badge{background:rgba(201,75,107,.24);border:1px solid #C94B6B;color:#ffe9dd}
-body[data-theme="glass"] .lesson-card.done{background:rgba(201,75,107,.18);border-color:#C94B6B}
+body[data-scene="moon"]:not([data-theme="paper"]) .badge{background:rgba(255,255,255,.05);border-color:rgba(255,177,140,.32);color:#bfa8b4}
+body[data-scene="moon"]:not([data-theme="paper"]) .badge.earned,
+body[data-scene="moon"]:not([data-theme="paper"]) a.badge{background:rgba(201,75,107,.24);border:1px solid #C94B6B;color:#ffe9dd}
+body[data-scene="moon"]:not([data-theme="paper"]) .lesson-card.done{background:rgba(201,75,107,.18);border-color:#C94B6B}
 
-body[data-theme="glass"] .btn{background:#B93A5C;color:#fff}
-body[data-theme="glass"] .btn:hover{background:#9c2e4c}
-body[data-theme="glass"] .btn-outline{background:transparent;border:1px solid #FFB18C;color:#fff}
-body[data-theme="glass"] .btn-outline:hover{background:rgba(255,177,140,.16)}
-body[data-theme="glass"] .btn-danger{background:#7a1f3a}
-body[data-theme="glass"] .panel.danger{border-color:rgba(201,75,107,.65)}
+body[data-scene="moon"]:not([data-theme="paper"]) .btn{background:#B93A5C;color:#fff}
+body[data-scene="moon"]:not([data-theme="paper"]) .btn:hover{background:#9c2e4c}
+body[data-scene="moon"]:not([data-theme="paper"]) .btn-outline{background:transparent;border:1px solid #FFB18C;color:#fff}
+body[data-scene="moon"]:not([data-theme="paper"]) .btn-outline:hover{background:rgba(255,177,140,.16)}
+body[data-scene="moon"]:not([data-theme="paper"]) .btn-danger{background:#7a1f3a}
+body[data-scene="moon"]:not([data-theme="paper"]) .panel.danger{border-color:rgba(201,75,107,.65)}
 
 /* keyboard focus */
 a:focus-visible,.btn:focus-visible{outline:2px solid #FFB18C;outline-offset:2px}
@@ -136,16 +136,16 @@ a:focus-visible,.btn:focus-visible{outline:2px solid #FFB18C;outline-offset:2px}
 /* ---------- wide screens: the page sheet steps aside so the scene's hero shows ---------- */
 @media (min-width:1000px) and (min-aspect-ratio:5/4){
   /* moon: the moon and branches stay clear on the right */
-  body[data-scene="moon"] .container{
+  body[data-scene="moon"] .container,body[data-scene="moon"]:not([data-theme="paper"]) .container{
     width:min(1100px,calc(100vw - 62vh - 60px));margin:28px auto 28px 30px}
 }
 
 /* ---------- small screens ---------- */
 @media (max-width:640px){
-  body[data-scene] .container{width:calc(100% - 16px);margin:12px auto;padding:26px 14px;border-radius:16px}
-  body[data-theme="paper"] .hero{min-height:calc(100vh - 110px);padding:50px 16px}
-  body[data-theme="paper"] .hero h1{font-size:1.9rem}
-  body[data-theme="glass"] .container{background:rgba(34,24,46,.55);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+  body[data-scene] .container,body[data-scene="moon"]:not([data-theme="paper"]) .container{width:calc(100% - 16px);margin:12px auto;padding:26px 14px;border-radius:16px}
+  body[data-theme="paper"] .hero,body[data-scene="temple"] .hero{min-height:calc(100vh - 110px);padding:50px 16px}
+  body[data-theme="paper"] .hero h1,body[data-scene="temple"] .hero h1{font-size:1.9rem}
+  body[data-scene="moon"]:not([data-theme="paper"]) .container{background:rgba(34,24,46,.55);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
 }
 
 /* ---------- reduced motion: still picture, simple fade between pages ---------- */
